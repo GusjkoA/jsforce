@@ -4,6 +4,8 @@
  * @author Shinichi Tomita <shinichi.tomita@gmail.com>
  */
 
+'use strict';
+
 var util  = jsforce.require('util'),
     _     = jsforce.require('underscore'),
     Cache = jsforce.require('./cache');
@@ -227,6 +229,18 @@ Tooling.prototype.request = function() {
  */
 Tooling.prototype.executeAnonymous = function(body, callback) {
   var url = this._baseUrl() + "/executeAnonymous?anonymousBody=" + encodeURIComponent(body);
+  return this.request(url).thenCall(callback);
+};
+
+/**
+ * Executes Apex tests asynchronously
+ *
+ * @param {Array.<String>} classids - Comma separated list of class IDs
+ * @param {Callback.<Tooling~ExecuteAnonymousResult>} [callback] - Callback function
+ * @returns {Promise.<Tooling~ExecuteAnonymousResult>}
+ */
+Tooling.prototype.runTestsAsynchronous = function(classids, callback) {
+  var url = this._baseUrl() + "/runTestsAsynchronous/?classids=" + classids.join(',');
   return this.request(url).thenCall(callback);
 };
 

@@ -4,6 +4,8 @@
  * @author Shinichi Tomita <shinichi.tomita@gmail.com>
  */
 
+'use strict';
+
 var events = jsforce.require('events'),
     inherits = jsforce.require('inherits'),
     Faye   = require('faye');
@@ -2925,6 +2927,7 @@ process.browser = true;
 process.env = {};
 process.argv = [];
 process.version = ''; // empty string to avoid regexp issues
+process.versions = {};
 
 function noop() {}
 
